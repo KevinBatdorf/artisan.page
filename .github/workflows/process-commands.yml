@@ -36,7 +36,7 @@ jobs:
           php -v
           php artisan --version
           php artisan tinker --execute='echo "hitttttt"'
-          # more ${{ github.workspace }}/build | php artisan tinker -vvv > ${{ github.workspace }}/static/${{ matrix.laravel }}.json
+          cat ${{ github.workspace }}/build | php artisan tinker -vvv > ${{ github.workspace }}/static/${{ matrix.laravel }}.json
           cd ${{ github.workspace }}
           git status
           ls -la static
