@@ -20,7 +20,7 @@ jobs:
       - name: Setup PHP, with composer and extensions
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 7.4.13
+          php-version: 8
           extensions: mbstring, dom, fileinfo
       - name: Get composer cache directory
         id: composer-cache
@@ -30,6 +30,8 @@ jobs:
       - name: Build command file
         run: |
           cd /tmp/laravel
+          cat ${{ github.workspace }}/build
+          which more
           php -v
           php artisan --version
           more ${{ github.workspace }}/build | php artisan tinker > ${{ github.workspace }}/static/${{ matrix.laravel }}.json
