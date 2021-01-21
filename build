@@ -1,16 +1,17 @@
-$commands = Artisan::all();
+$artisan = new Artisan();
+$commands = $artisan::all();
 
 return collect($commands)->sortBy(function ($command) {
-    return $command->getName();
+  return $command->getName();
 })->map(function ($command) {
-    return [
+  return [
     'name' => $command->getName(),
     'description' => $command->getDescription(),
     'synopsis' => $command->getSynopsis(),
     'definition' => $command->getDefinition(),
     'aliases' => $command->getAliases(),
     'arguments' => collect($command->getDefinition()->getArguments())->map(function ($argument) {
-        return [
+      return [
         'name' => $argument->getName(),
         'description' => $argument->getDescription(),
         'default' => $argument->getDefault(),
@@ -18,7 +19,7 @@ return collect($commands)->sortBy(function ($command) {
       ];
     })->values()->all(),
     'options' => collect($command->getDefinition()->getOptions())->map(function ($option) {
-        return [
+      return [
         'name' => $option->getName(),
         'description' => $option->getDescription(),
         'value_required' => $option->isValueRequired(),
