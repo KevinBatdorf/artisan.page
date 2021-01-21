@@ -1,5 +1,5 @@
 $artisan = new Artisan();
-$commands = $artisan::all();
+$commands = $artisan->__callStatic('all', []);
 
 return collect($commands)->sortBy(function ($command) {
   return $command->getName();
