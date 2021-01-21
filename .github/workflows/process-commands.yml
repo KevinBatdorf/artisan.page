@@ -31,7 +31,7 @@ jobs:
       - name: Build command file
         run: |
           cd /tmp/laravel
-          cat ${{ github.workspace }}/build.sh | php artisan tinker -vvv > ${{ github.workspace }}/static/${{ matrix.laravel }}.json
+          cat ${{ github.workspace }}/build | php artisan tinker
           cd ${{ github.workspace }}
           git status
           ls -la static
