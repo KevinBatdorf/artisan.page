@@ -26,18 +26,9 @@ jobs:
         id: composer-cache
         run: echo "::set-output name=dir::$(composer config cache-files-dir)"
       - name: Install Laravel
-        run: composer create-project laravel/laravel="${{ matrix.laravel }}" laravel
-      - name: Prepare the application
+        run: composer create-project laravel/laravel="${{ matrix.laravel }}" /tmp/laravel
+      - name: Build command file
         run: |
-          cd laravel
-          php -r "file_exists('.env') || copy('.env.example', '.env');"
-          php artisan key:generate
-      - name: Clear Config
-        run: |
-          cd laravel
-          php artisan config:clear
-      - name: Test with phpunit
-        run: |
-          cd laravel
-          php -f ${{ github.workspace }}/build.php > ${{ github.workspace }}/static/${{ matrix.laravel }}.json
+          cd /tmp/laravel
+          more ${{ github.workspace }}/build | php artisan tinker > ${{ github.workspace }}/static/${{ matrix.laravel }}.json
           ls -la ${{ github.workspace }}/static
