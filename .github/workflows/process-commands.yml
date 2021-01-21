@@ -31,7 +31,7 @@ jobs:
         run: |
           cd /tmp/laravel
           php artisan --version
-          # more ${{ github.workspace }}/build | php artisan tinker > ${{ github.workspace }}/static/${{ matrix.laravel }}.json
+          more ${{ github.workspace }}/build | php artisan tinker
           cd ${{ github.workspace }}
           git status
           ls -la static
