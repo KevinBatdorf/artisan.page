@@ -33,6 +33,11 @@ jobs:
           php -r "file_exists('.env') || copy('.env.example', '.env');"
           php artisan key:generate
       - name: Clear Config
-        run: php artisan config:clear
+        run: |
+          cd laravel
+          php artisan config:clear
       - name: Test with phpunit
-        run: php -f ${{ github.workspace }}/build.php > ${{ github.workspace }}/static/${{ matrix.laravel }}.json
+        run: |
+          cd laravel
+          php -f ${{ github.workspace }}/build.php > ${{ github.workspace }}/static/${{ matrix.laravel }}.json
+          ls -la ${{ github.workspace }}/static
